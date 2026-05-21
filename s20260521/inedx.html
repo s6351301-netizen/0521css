@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f5f2ec;
+            --panel: rgba(255, 255, 255, 0.92);
+            --accent: #6d5dfc;
+            --accent-soft: #8d79ff;
+            --text: #2a2a2a;
+            --muted: #5c5c62;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, #f8f1e8 0%, #e8f3ff 100%);
+        }
+
+        .container {
+            width: 80%;
+            height: 30vh;
+            margin: 20px auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 26px;
+            background: var(--panel);
+            box-shadow: 0 24px 55px rgba(72, 84, 120, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(109, 93, 252, 0.12), transparent 35%);
+            pointer-events: none;
+        }
+
+        .container > div {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 22px;
+            min-height: 100%;
+            padding: 1.5rem;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .item11 {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(67, 118, 252, 0.85), rgba(120, 94, 255, 0.75)),
+                url(https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1350&q=80);
+            background-size: cover;
+            background-position: center;
+            color: #f7f7ff;
+        }
+
+        .item21 {
+            width: 50%;
+            background: linear-gradient(135deg, #ff8a80, #ffb347);
+        }
+
+        .item22 {
+            width: 50%;
+            background: linear-gradient(135deg, #8ed2ff, #5b8cff);
+        }
+
+        .item31 {
+            width: 33%;
+            background: linear-gradient(135deg, #9fe6a0, #40c9a2);
+        }
+
+        .item32 {
+            width: 33%;
+            background: linear-gradient(135deg, #fbb5b5, #f78ca0);
+        }
+
+        .item33 {
+            width: 33%;
+            background: linear-gradient(135deg, #f7d794, #f6b93b);
+            color: #2f2f2f;
+        }
+
+        .item41 {
+            width: 25%;
+            background: linear-gradient(135deg, #6a89cc, #4a69bd);
+        }
+
+        .item42 {
+            width: 25%;
+            background: linear-gradient(135deg, #0fb9b1, #45aaf2);
+        }
+
+        .item43 {
+            width: 25%;
+            background: linear-gradient(135deg, #ff7979, #eb4d4b);
+        }
+
+        .item44 {
+            width: 25%;
+            background: linear-gradient(135deg, #f6e58d, #ffd32a);
+            color: #2f2f2f;
+        }
+
+        .item51,
+        .item52,
+        .item53,
+        .item54 {
+            width: 25%;
+            background: rgba(116, 185, 255, 0.3);
+            color: var(--text);
+        }
+
+        .item51 { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .item52 { background: linear-gradient(135deg, #c3cfe2, #c3cfe2); }
+        .item53 { background: linear-gradient(135deg, #f5f7fa, #d7e1ec); }
+        .item54 { background: linear-gradient(135deg, #d9afd9, #97d9e1); }
+
+        .item61 {
+            width: 33%;
+            background: linear-gradient(135deg, #95a5a6, #2c3e50);
+        }
+
+        .item62 {
+            width: 33%;
+            background: linear-gradient(135deg, #f8a5c2, #c44569);
+        }
+
+        .item63 {
+            width: 33%;
+            background: linear-gradient(135deg, #63cdda, #3dc1d3);
+        }
+
+        .item71 {
+            width: 100%;
+            min-height: 6rem;
+            padding: 1.25rem 1rem;
+            background: linear-gradient(135deg, #120d43, #3a3090);
+            color: #f4f4ff;
+        }
+
+        .container.photo-grid {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: auto;
+            min-height: 18rem;
+            padding: 1rem 0 1.2rem;
+        }
+
+        .photo-item {
+            width: 23%;
+            min-width: 180px;
+            height: 14rem;
+            border-radius: 24px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .photo-item::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.45));
+        }
+
+        .photo-item span {
+            position: relative;
+            z-index: 1;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .container.timeline {
+            display: block;
+            padding: 1.5rem 0 2rem;
+            overflow: visible;
+            background: transparent;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .timeline-header h2 {
+            margin: 0;
+            font-size: 2rem;
+            color: #24325f;
+        }
+
+        .timeline-header p {
+            margin: 0;
+            max-width: 50rem;
+            color: #5f6480;
+            line-height: 1.7;
+        }
+
+        .timeline-list {
+            width: 100%;
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;
+            overflow: hidden;
+        }
+
+        .timeline-card {
+            flex: 1 1 20%;
+            min-width: 18%;
+            max-width: 22%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 249, 255, 0.92));
+            color: #2a2a2a;
+            padding: 1.2rem 1.2rem;
+            border-radius: 22px;
+            border: 1px solid rgba(47, 84, 221, 0.12);
+            box-shadow: 0 12px 28px rgba(39, 67, 134, 0.06);
+            text-align: left;
+            box-sizing: border-box;
+            position: relative;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .timeline-card::before {
+            content: "";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(109, 93, 252, 0.9);
+            box-shadow: 0 0 0 6px rgba(109, 93, 252, 0.08);
+        }
+
+        .timeline-card h3 {
+            margin: 0 0 0.65rem;
+            font-size: 1.15rem;
+            color: #2f3057;
+        }
+
+        .timeline-card p {
+            margin: 0;
+            line-height: 1.7;
+            color: #4b5169;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .timeline-card span {
+            display: inline-block;
+            margin-top: 0.9rem;
+            font-size: 0.95rem;
+            color: #6b7280;
+            background: rgba(109, 93, 252, 0.08);
+            padding: 0.28rem 0.75rem;
+            border-radius: 999px;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .timeline-card:hover,
+        .timeline-card.active {
+            flex: 2 1 42%;
+            max-width: 42%;
+            box-shadow: 0 24px 48px rgba(39, 67, 134, 0.16);
+            opacity: 1;
+        }
+
+        .timeline-card:hover p,
+        .timeline-card.active p {
+            max-height: 6rem;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+
+        .timeline-card:hover span,
+        .timeline-card.active span {
+            opacity: 1;
+        }
+
+        .item-content {
+            width: 100%;
+            max-width: 26rem;
+        }
+
+        .item-content h1,
+        .item-content h2,
+        .item-content h3 {
+            margin: 0;
+            line-height: 1.1;
+            letter-spacing: 0.03em;
+        }
+
+        .item-content h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-content h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-content p {
+            margin: 0;
+            line-height: 1.6;
+            color: inherit;
+            opacity: 0.95;
+        }
+
+        .item-content ul {
+            margin: 0.5rem 0 0;
+            padding-left: 1.2rem;
+            text-align: left;
+        }
+
+        .item-content li {
+            margin-bottom: 0.35rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container container-1">
+        <div class="item11">
+            <div class="item-content">
+                <h1>王氏家族故事館</h1>
+                <p>歡迎來到我們的家族網站，這裡收藏傳統、回憶與下一代的夢想。</p>
+            </div>
+        </div>
+    </div>
+    <div class="container container-4">
+        <div class="item41">
+            <div class="item-content">
+                <h2>家族長老</h2>
+                <p>祖父母是家族智慧與溫暖的核心，帶領我們傳承每一個節日儀式。</p>
+            </div>
+        </div>
+        <div class="item42">
+            <div class="item-content">
+                <h2>父母一輩</h2>
+                <p>他們是家庭的支柱，塑造了我們堅強與善良的價值觀。</p>
+            </div>
+        </div>
+        <div class="item43">
+            <div class="item-content">
+                <h2>兄弟姐妹</h2>
+                <p>手足之間的笑聲與默契，是最珍貴的日常回憶。</p>
+            </div>
+        </div>
+        <div class="item44">
+            <div class="item-content">
+                <h2>下一代</h2>
+                <p>孩子們的夢想，讓家族故事持續延伸到未來。</p>
+            </div>
+        </div>
+    </div>
+    <div class="container container-2">
+        <div class="item21">
+            <div class="item-content">
+                <h2>家族文化</h2>
+                <p>每年團聚、節慶料理與傳統工藝，都是我們珍視的文化資產。</p>
+            </div>
+        </div>
+        <div class="item22">
+            <div class="item-content">
+                <h2>家族願景</h2>
+                <p>我們相信愛與尊重能讓每個家庭成員都找到自己的歸屬。</p>
+            </div>
+        </div>
+    </div>
+    <div class="container container-3">
+        <div class="item31">
+            <div class="item-content">
+                <h3>家庭</h3>
+                <p>信任</p>
+            </div>
+        </div>
+        <div class="item32">
+            <div class="item-content">
+                <h3>傳統</h3>
+                <p>團聚</p>
+            </div>
+        </div>
+        <div class="item33">
+            <div class="item-content">
+                <h3>夢想</h3>
+                <p>成長</p>
+            </div>
+        </div>
+    </div>
+    <div class="container container-5">
+        <div class="item51">
+            <div class="item-content">
+                <h2>祖傳菜</h2>
+                <p>祖母的家常菜，讓每一次相聚更加溫暖。</p>
+            </div>
+        </div>
+        <div class="item52">
+            <div class="item-content">
+                <h2>節慶禮</h2>
+                <p>中秋、過年與端午，是家族凝聚最重要的時刻。</p>
+            </div>
+        </div>
+        <div class="item53">
+            <div class="item-content">
+                <h2>故事書</h2>
+                <p>每一句老故事，都是我們共同的根與記憶。</p>
+            </div>
+        </div>
+        <div class="item54">
+            <div class="item-content">
+                <h2>相簿</h2>
+                <p>翻開照片，回憶家族旅行與成長時刻。</p>
+            </div>
+        </div>
+    </div>
+    <div class="container container-6">
+        <div class="item61">
+            <div class="item-content">
+                <h3>禮儀</h3>
+                <ul>
+                    <li>敬老尊賢</li>
+                    <li>互助互望</li>
+                    <li>歡慶每一刻</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item62">
+            <div class="item-content">
+                <h3>回憶</h3>
+                <ul>
+                    <li>童年野餐</li>
+                    <li>家庭聚餐</li>
+                    <li>手寫賀卡</li>
+                </ul>
+            </div>
+        </div>
+        <div class="item63">
+            <div class="item-content">
+                <h3>未來</h3>
+                <ul>
+                    <li>世代傳承</li>
+                    <li>共築幸福</li>
+                    <li>永續情感</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="container container-7"> 
+        <iframe width="320" height="260" frameborder="0" src="https://www.peopo.org/video/454545/embed" scrolling="no" allowfullscreen></iframe>
+        <div class="item71">         
+            <div class="item-content">
+                                    
+                <h1>王氏家族 · 永恆傳承</h1>
+                <p>在這裡，我們一同紀錄幸福、延續傳統，並為下一代留下最珍貴的家族印記。</p>               
+            </div>
+        </div>
+    </div>
+
+    <div class="container photo-grid">
+        <div class="photo-item" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80');">
+            <span>祖父母回憶</span>
+        </div>
+        <div class="photo-item" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80');">
+            <span>親子相聚</span>
+        </div>
+        <div class="photo-item" style="background-image: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80');">
+            <span>兄弟姐妹</span>
+        </div>
+        <div class="photo-item" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80');">
+            <span>節慶聚會</span>
+        </div>
+    </div>
+
+    <div class="container timeline">              
+        <div class="timeline-header">              
+            <div>                  
+                <h2>家族活動時間軸</h2>
+                <p>從春季到年末，四個主題區塊輪流展示家族的重要時刻；滑鼠移過時，該主題會完整展開。</p>
+            </div>
+        </div>
+        <div class="timeline-list">
+            <div class="timeline-card" data-topic="春季團聚">
+                <h3>春季團聚</h3>
+                <p>全家一起包餃子、貼春聯、拜訪長輩，讓新年從家的味道開始，是最溫暖的團圓時光。</p>
+                <span>主題：新年團圓</span>
+            </div>
+            <div class="timeline-card" data-topic="夏日行旅">
+                <h3>夏日行旅</h3>
+                <p>一起出遊海邊、山林，留下歡笑與冒險的照片，讓旅行成為親情見證，是親子冒險的幸福記憶。</p>
+                <span>主題：親子冒險</span>
+            </div>
+            <div class="timeline-card" data-topic="秋季豐收">
+                <h3>秋季豐收</h3>
+                <p>家族品嚐烤肉、採果、賞月，看著收穫與祝福在夜空裡延伸，這是節慶分享的幸福畫面。</p>
+                <span>主題：節慶分享</span>
+            </div>
+            <div class="timeline-card" data-topic="冬季聚餐">
+                <h3>冬季聚餐</h3>
+                <p>年夜飯圍爐、長輩講述家族故事，讓溫暖變成下一代傳承的力量，是傳統傳承的核心。</p>
+                <span>主題：傳統傳承</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.timeline-card');
+        let activeIndex = 0;
+        let intervalId;
+
+        function setActive(index) {
+            cards.forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+            activeIndex = index;
+        }
+
+        function startRotation() {
+            intervalId = setInterval(() => {
+                const nextIndex = (activeIndex + 1) % cards.length;
+                setActive(nextIndex);
+            }, 3000);
+        }
+
+        function stopRotation() {
+            clearInterval(intervalId);
+        }
+
+        cards.forEach((card, index) => {
+            card.addEventListener('mouseenter', () => {
+                stopRotation();
+                setActive(index);
+            });
+            card.addEventListener('mouseleave', () => {
+                startRotation();
+            });
+        });
+
+        setActive(0);
+        startRotation();
+    </script>
+
+</body>
+
+</html>
